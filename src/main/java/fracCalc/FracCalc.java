@@ -8,11 +8,15 @@ public class FracCalc {
 
     public static void main(String[] args)
     {
+    	Scanner s = new Scanner(System.in);
     	System.out.println("Welcome to the Frac Calc Calculator");
-    	Scanner userInput = new Scanner(System.in);
-    	System.out.print("Enter an expression");
-    	String expression = userInput.nextLine();
+    	System.out.print("Enter an expression: ");
+    	String expression = s.nextLine();
+    	while(!expression.equalsIgnoreCase("quit")) {
     	System.out.println(produceAnswer(expression));
+    	System.out.print("Enter an expression: ");
+    	expression = s.nextLine();
+    	}
         // TODO: Read the input from the user and call produceAnswer with an equation
 
     }
@@ -43,8 +47,40 @@ public class FracCalc {
 
 
         }
-        return fraction2;
+        String operandtwoWhole = findWhole(fraction2);
+        String operandtwoNum = findNum(fraction2);
+        String operandtwoDenom = findDenom(fraction2);
+        
+        String check2Answer = "whole:" + operandtwoWhole + " numerator:" + operandtwoNum + " denominator:" + operandtwoDenom; 
+        
+        return check2Answer;}
     // TODO: Fill in the space below with any helper methods that you think you will need
-
+        public static String findWhole(String str) {
+        	if(str.contains("_")) {
+        		return str.substring(0, str.indexOf('_'));
+        	}else if(str.contains("/")) {
+        		return "0";
+        	} else return str;
+        }
+        public static String findNum(String str){
+        	if(str.contains("_")) {
+        		return str.substring(str.indexOf('_') + 1, str.indexOf('/'));
+        	}else if(str.contains("/")) {
+        		return str.substring(0, str.indexOf('/'));
+        	}else {
+        		return "0";
+        	}
+        }
+        
+        public static String findDenom(String str){
+        	if(str.contains("/")) {
+        		return str.substring(str.indexOf("/")+1);
+        	}else{
+        		return "1";
+        	}
+    
+        }
     }
-}
+
+	
+
